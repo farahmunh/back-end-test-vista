@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": "./src",          // where your TS files live
+    "outDir": "./dist",          // compiled JS output folder
+
+    /* Environment Settings */
+    "target": "ES2020",          // safe modern target for Node.js
+    "module": "commonjs",        // Node.js modules
+    "lib": ["ES2020"],           // available JS APIs
+    "types": ["node"],           // include Node.js types
+
+    /* Other Outputs */
+    "sourceMap": true,           // generate .map files for debugging
+    "declaration": false,        // you don’t need .d.ts files here
+
+    /* Strict Type Checking */
+    "strict": true,
+    "esModuleInterop": true,     // allows `import express from "express"`
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"],            // compile only source folder
+  "exclude": ["node_modules"]    // don’t compile dependencies
+}
