@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { createService, getServiceById } from "../controllers/serviceController";
-import { deleteService } from "../controllers/serviceController";
-import { updateService } from "../controllers/serviceController";
+import { createService, getServiceById, updateService, deleteService } from "../controllers/serviceController";
+import { body, param, validationResult } from "express-validator";
 
 const router = Router();
+
+// Middleware to handle validation results
+const validateRequest = (req: any, res: any, next: any) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
 
 /**
  * @swagger
@@ -30,7 +38,16 @@ const router = Router();
  *       201:
  *         description: Service created successfully
  */
-router.post("/", createService);
+router.post(
+    "/",
+    [
+        body("companyId").notEmpty().withMessage("Company ID is required").isInt().withMessage("Company ID must be an integer"),
+        body("name").notEmpty().withMessage("Service name is required"),
+        body("price").notEmpty().withMessage("Price is required").isFloat().withMessage("Price must be a number"),
+    ],
+    validateRequest, 
+    createService
+);
 
 /**
  * @swagger
@@ -84,7 +101,16 @@ router.get("/:id", getServiceById);
  *       404:
  *         description: Service not found
  */
-router.put("/:id", updateService);
+router.put(
+    "/:id",
+    [
+        param("id").isInt().withMessage("Service ID must be an integer"),
+        body("name").notEmpty().withMessage("Service name is required"),
+        body("price").notEmpty().withMessage("Price is required").isFloat().withMessage("Price must be a number"),
+    ],
+    validateRequest,
+    updateService
+);
 
 /**
  * @swagger

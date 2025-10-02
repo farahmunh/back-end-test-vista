@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { createCompany, getCompanies } from "../controllers/companyController";
-import { deleteCompany } from "../controllers/companyController";
-import { updateCompany } from "../controllers/companyController";
+import { createCompany, getCompanies, deleteCompany, updateCompany } from "../controllers/companyController";
+import { body, validationResult } from "express-validator";
 
 const router = Router();
+
+// Middleware to handle validation results
+const validateRequest = (req: any, res: any, next: any) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+  next();
+};
 
 /**
  * @swagger
@@ -36,7 +44,15 @@ router.get("/", getCompanies);
  *       201:
  *         description: Company created successfully
  */
-router.post("/", createCompany);
+router.post(
+    "/", 
+    [
+        body("name").notEmpty().withMessage("Company name is required"),
+        body("registrationNumber").notEmpty().withMessage("Registration number is required"),
+    ],
+    validateRequest,
+    createCompany
+);
 
 /**
  * @swagger
@@ -65,7 +81,15 @@ router.post("/", createCompany);
  *       200:
  *         description: Company updated successfully
  */
-router.put("/:id", updateCompany);
+router.put(
+    "/:id", 
+    [
+        body("name").notEmpty().withMessage("Company name is required"),
+        body("registrationNumber").notEmpty().withMessage("Registration number is required"),
+    ],
+    validateRequest,
+    updateCompany
+);
 
 /**
  * @swagger
