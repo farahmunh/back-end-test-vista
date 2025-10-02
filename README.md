@@ -1,5 +1,4 @@
 # Company and Service Managament API (Backend)
-
 This is the backend API for managing **companies** and their **services**. 
 It allows you to create, edit, delete companies, add services to companies, and retrieve company and service data.
 
@@ -38,10 +37,10 @@ It allows you to create, edit, delete companies, add services to companies, and 
 
 5. **Start the server:**
 
-    ```bash
+   ```bash
    npm run start
 
-6. **The API should now be running on `http://localhost:3000`.**
+6. **The API should now be running on** `http://localhost:3000`**.**
 
 ## API Endpoints
 Here are the available API endpoints:
@@ -58,25 +57,19 @@ Here are the available API endpoints:
 ## Prisma Schema
 The database schema is defined using Prisma in the `schema.prisma` file. It includes models for both **Company** and **Service**:
 
+   ```prisma
+   model Company {
+      id                 Int       @id @default(autoincrement())
+      name               String
+      registrationNumber String
+      services           Service[]
+   }
 
-    ```bash
-    model Company {
-    id                 Int       @id @default(autoincrement())
-    name               String
-    registrationNumber String
-    services           Service[]
-    }
-
-    model Service {
-    id          Int     @id @default(autoincrement())
-    companyId   Int
-    company     Company @relation(fields: [companyId], references: [id])
-    name        String
-    description String?
-    price       Float
-    }
-
-## Additional Notes
-- Ensure MySQL is running on your machine or configure it in the .env file.
-- Use Postman or Swagger for API documentation. 
-- For detailed error messages and validation, refer to the error handling section in the code.
+   model Service {
+     id          Int     @id @default(autoincrement())
+     companyId   Int
+     company     Company @relation(fields: [companyId], references: [id])
+     name        String
+     description String?
+     price       Float
+   }
