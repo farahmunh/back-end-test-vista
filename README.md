@@ -25,22 +25,23 @@ It allows you to create, edit, delete companies, add services to companies, and 
    npm install
 
 3. **Create a `.env` file:**
-  Copy the `.env.example` file to `.env` and fill in the necessary configuration values (e.g., your database URL):
+   
+   Copy the `.env.example` file to `.env` and fill in the necessary configuration values (e.g., your database URL):
 
    ```bash
    cp .env.example .env
 
-4. **Set up the database:**
+5. **Set up the database:**
 
    ```bash
    npx prisma migrate dev
 
-5. **Start the server:**
+6. **Start the server:**
 
    ```bash
    npm run start
 
-6. **The API should now be running on** `http://localhost:3000`**.**
+7. **The API should now be running on** `http://localhost:3000`**.**
 
 ## API Endpoints
 Here are the available API endpoints:
