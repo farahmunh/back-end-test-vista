@@ -73,3 +73,9 @@ The database schema is defined using Prisma in the `schema.prisma` file. It incl
      description String?
      price       Float
    }
+   ```
+
+## Additional Notes
+- Ensure MySQL is running on your machine or configure it in the `.env` file.
+- Use **Postman** or **Swagger** for API documentation.
+- For detailed error messages and validation, refer to the error handling section in the code.
