@@ -48,13 +48,17 @@ It allows you to create, edit, delete companies, add services to companies, and 
 ## API Endpoints
 Here are the available API endpoints:
 - `POST /companies`: **Create** a new company.
+  - **Validation**: Requires `name` and `registrationNumber`. Missing fields return 400 Bad Request.
+- `PUT /companies/:id`: **Edit** an existing company by ID.
+  - **Validation**: Requires `name` and `registrationNumber`.
+- `POST /services`: **Create** a new service under a company.
+  - **Validation**: Requires `companyId` (integer), `name`, and `price` (number).
+- `PUT /services/:id`: **Edit** an existing service by ID.
+  - **Validation**: Requires `name` and `price` (number).
 - `GET /companies`: **List** all companies and their services.
 - `GET /companies/:id`: **Get** a specific company by ID (include services).
-- `PUT /companies/:id`: **Edit** an existing company by ID.
 - `DELETE /companies/:id`: **Delete** a company by ID.
-- `POST /services`: **Create** a new service under a company.
 - `GET /services/:id`: **Get** details of a service by ID.
-- `PUT /services/:id`: **Edit** an existing service by ID.
 - `DELETE /services/:id`: **Delete** a service by ID.
 
 ## Prisma Schema
