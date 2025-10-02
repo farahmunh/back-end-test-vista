@@ -31,17 +31,19 @@ It allows you to create, edit, delete companies, add services to companies, and 
    ```bash
    cp .env.example .env
 
-5. **Set up the database:**
+4. **Set up the database:**
 
    ```bash
    npx prisma migrate dev
 
-6. **Start the server:**
+5. **Start the server:**
+
+   Start the Express server:
 
    ```bash
    npm run start
 
-7. **The API should now be running on** `http://localhost:3000`**.**
+6. **The API should now be running on** `http://localhost:3000`.
 
 ## API Endpoints
 Here are the available API endpoints:
@@ -75,6 +77,14 @@ The database schema is defined using Prisma in the `schema.prisma` file. It incl
      price       Float
    }
    ```
+
+## API Documentation
+
+The API documentation is available through **Swagger UI**. To access the documentation, run the server and visit:
+
+[http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+
+You will be able to see all available endpoints, their descriptions, and test the API directly from the browser.
 
 ## Additional Notes
 - Ensure MySQL is running on your machine or configure it in the `.env` file.
