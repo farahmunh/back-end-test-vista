@@ -4,6 +4,7 @@ import companiesRouter from "./routes/companies";
 import servicesRouter from "./routes/services";
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import { Request, Response, NextFunction } from 'express';
 
 const app = express();
 
@@ -23,13 +24,22 @@ const swaggerOptions = {
 // Create Swagger specs
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
+// Logging Middleware to log HTTP method, path, and timestamp
+const requestLogger = (req: Request, res: Response, next: NextFunction) => {
+  const timestamp = new Date().toISOString();  // Get current timestamp
+  console.log(`${timestamp} - ${req.method} ${req.path}`);  // Log method and path
+  next();  // Proceed to the next middleware or route handler
+};
+
+// Apply the requestLogger middleware
+app.use(requestLogger);  // This will log all requests
+
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Serve Swagger documentation at /api-docs
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 
 // Routes
 app.use("/companies", companiesRouter);
